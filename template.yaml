@@ -12,7 +12,9 @@ Globals:
     MemorySize: 512
     Timeout: 30
     Environment:
-      ORDERS_TABLE: !Ref OrdersTable
+      Variables:
+        ORDERS_TABLE: !Ref OrdersTable
+
 
 Resources:
   OrdersTable:
@@ -20,6 +22,7 @@ Resources:
     Properties:
       PrimaryKey:
         Name: id
+        Type: Number
   CreateOrderFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:

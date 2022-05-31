@@ -25,7 +25,7 @@ public class ReadOrdersLambda {
         List<Order> orders = scanResult.getItems().stream()
                 .map(item -> new Order(
                                 Integer.parseInt(item.get("id").getN()),
-                                item.get("product").getS(),
+                                item.get("itemName").getS(),
                                 Integer.parseInt(item.get("quantity").getN())
                         )
                 ).collect(Collectors.toList());
