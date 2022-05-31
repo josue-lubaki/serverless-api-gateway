@@ -60,3 +60,26 @@ Resources:
       CodeUri: ReadOrdersFunction
     Metadata:
       SamResourceId: ReadOrdersFunction
+Outputs:
+  CreateOrdersAPI:
+    Description: API Gateway URL for CreateOrders
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/orders
+  CreateOrdersFunction:
+    Description: Lambda function ARN for CreateOrders
+    Value:
+      Fn::GetAtt:
+      - CreateOrderFunction
+      - Arn
+  ReadOrdersFunction:
+    Description: Lambda function ARN for ReadOrders
+    Value:
+      Fn::GetAtt:
+      - ReadOrdersFunction
+      - Arn
+  CreateOrdersFunctionIamRole:
+    Description: Lambda function IAM Role for CreateOrders
+    Value:
+      Fn::GetAtt:
+      - CreateOrderFunctionRole
+      - Arn

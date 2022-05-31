@@ -54,3 +54,17 @@ Resources:
           Properties:
             Path: /orders
             Method: GET
+
+Outputs:
+    CreateOrdersAPI: # random name
+      Description: API Gateway URL for CreateOrders
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/orders"
+    CreateOrdersFunction:
+      Description: Lambda function ARN for CreateOrders
+      Value: !GetAtt CreateOrderFunction.Arn
+    ReadOrdersFunction:
+      Description: Lambda function ARN for ReadOrders
+      Value: !GetAtt ReadOrdersFunction.Arn
+    CreateOrdersFunctionIamRole:
+      Description: Lambda function IAM Role for CreateOrders
+      Value: !GetAtt CreateOrderFunctionRole.Arn
