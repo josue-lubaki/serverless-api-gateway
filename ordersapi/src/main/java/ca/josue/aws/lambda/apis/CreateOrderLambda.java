@@ -11,6 +11,6 @@ public class CreateOrderLambda {
         ObjectMapper objectMapper = new ObjectMapper();
         Order order = objectMapper.readValue(request.getBody(), Order.class);
 
-        return new APIGatewayProxyResponseEvent().withBody("Order ID : " + order.id);
+        return new APIGatewayProxyResponseEvent().withStatusCode(201).withBody("Order ID : " + order.id);
     }
 }
