@@ -11,12 +11,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CreateOrderLambda {
-    public APIGatewayProxyResponseEvent createOrder(APIGatewayProxyRequestEvent request) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Order order = objectMapper.readValue(request.getBody(), Order.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final DynamoDB dynamoDB = new DynamoDB(AmazonDynamoDBClientBuilder.defaultClient());
 
-        // initialize dynamoDB client
-        DynamoDB dynamoDB = new DynamoDB(AmazonDynamoDBClientBuilder.defaultClient());
+    public APIGatewayProxyResponseEvent createOrder(APIGatewayProxyRequestEvent request) throws JsonProcessingException {
+        Order order = objectMapper.readValue(request.getBody(), Order.class);
 
         // create table if not exists
         Table orders_table = dynamoDB.getTable(System.getenv("ORDERS_TABLE"));
